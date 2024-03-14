@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Form</title>
+        <style>
+             body {
+        font-family: Arial, sans-serif;
+    }
+
+    form {
+        max-width: 300px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+        </style>
+</head>
+<body>
+    <form id="loginForm" onsubmit="return validateForm()">
+    <h2>Login</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <label for="captcha">Captcha:</label>
+    <input type="text" id="captcha" name="captcha" readonly><br>
+
+    <input type="text" id="captchaInput" name="captchaInput" required><br>
+
+    <input type="submit" value="Login">
+    </form>
+
+    <script>
+    function generateCaptcha() {
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var captcha = '';
+        for (var i = 0; i < 6; i++) {
+            captcha += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return captcha;
+    }
+
+    document.getElementById('captcha').value = generateCaptcha();
+ 
+    function validateForm() {
+        var userInput = document.getElementById('captcha').value.toLowerCase();
+        var captchaInput = document.getElementById('captchaInput').value.toLowerCase();
+
+        if (userInput === captchaInput) {
+            alert('Login successful!');
+            return true;
+        } else {
+            alert('Captcha incorrect. Please try again.');
+            return false;
+        }
+    }
+            </script>
+    </body>
+</html>
